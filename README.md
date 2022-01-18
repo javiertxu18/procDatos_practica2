@@ -1,6 +1,8 @@
 # procDatos_practica2
 Esta es la práctica número 2 de la asignatura de procesamiento de datos del máster en big data.
 
+*NOTA: Ejecutar sobre windows*
+
 ## Enunciado
 La práctica consiste en descargar información de diversas tablas (INE, Twitter, scrapp), cargarlas en Python, limpiar esos datos para dejarlos de manera correcta y una vez limpios subirlos a una capa raw de una BBDD.
 
