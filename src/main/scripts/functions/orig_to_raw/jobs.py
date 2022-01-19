@@ -4,8 +4,8 @@ from src.main.scripts.objects.CleanerXls import CleanerXls
 import src.main.scripts.functions.inOut as inOutFunc
 import src.main.scripts.functions.logger as loggerFunc
 
-import src.main.scripts.functions.extract as extractFunc
-import src.main.scripts.functions.transform as transformFunc
+import src.main.scripts.functions.orig_to_raw.extract as extractFunc
+import src.main.scripts.functions.orig_to_raw.transform as transformFunc
 
 # Creamos el logger
 logger = loggerFunc.getLogger("jobs")

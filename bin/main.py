@@ -1,6 +1,6 @@
 import src.main.scripts.functions.inOut as inOutFunc
 import src.main.scripts.functions.logger as loggerFunc
-import src.main.scripts.functions.jobs as jobsFunc
+import src.main.scripts.functions.orig_to_raw.jobs as jobs1Func
 
 
 def main():
@@ -15,12 +15,12 @@ def main():
     logger.debug("Inicio programa.")
 
     print("\nPráctica 2\n\nETL de 'edadMedia_sexo_municipio.csv' a PostgreSQL")
-    jobsFunc.jobEdadMediaMunic()
-    print("Ok")
+    jobs1Func.jobEdadMediaMunic()
+    print("ETL completado.")
 
     print("\n\nETL de los xls sobre el paro a PostgreSQL")
-    jobsFunc.jobParoPorMunic()
-    print("Ok")
+    jobs1Func.jobParoPorMunic()
+    print("ETL completado.")
 
     logger.debug("Fin de programa.")
 
