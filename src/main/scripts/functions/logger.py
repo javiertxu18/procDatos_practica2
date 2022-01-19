@@ -28,6 +28,8 @@ def setLoggerConfig():
     except Exception as e:
         print("Error configurando el logger: " + str(e))
         return False
+
+
 # -----------------------------------------------------------------------------------------------
 
 # DESC:
