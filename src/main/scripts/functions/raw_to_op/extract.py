@@ -1,27 +1,35 @@
 import src.main.scripts.functions.logger as loggerFunc
+import src.main.scripts.functions.postgresql as postgresqlFunc
 
 # Creamos el logger
 logger = loggerFunc.getLogger("ExtractFunc")
 
-
 # Función para la extracción de csv
 def extract_edadMedia_munic_csv(clCsv):
     try:
-        logger.debug("Extrayendo datos del fichero '" + str(clCsv._filePath).split('\\')[-1] + "'....")
-        dev = clCsv.getFileDf(";")
-        logger.debug("Datos extraídos correctamente")
-        return dev
+        return postgresqlFunc.getFromDb('"RAW".edad_media_sexo_municipio')
     except Exception as e:
         logger.error("Error extrayendo datos de 'src/main/res/raw/edadMedia_sexo_municipio.csv'. " + str(e))
         return False
 
-
 # Función para la extracción de xls
 def extract_paro_munic_xls(clXls):
     try:
-        logger.debug("Extrayendo datos del fichero '" + str(clXls._filePath).split('\\')[-1] + "'....")
-        dev = clXls.getFileDf(header=1)
-        logger.debug("Datos extraídos correctamente")
+
+        # Sacamos el nombre de la tabla
+        fileName = str(clXls._filePath).split("\\")[-1]
+
+        anio = str(fileName.split("_")[-2])
+        sem = str(fileName.split("_")[-4])
+
+        if sem == 'primer':
+            sem = 'semestre1'
+        elif sem == 'segundo':
+            sem = 'semestre2'
+
+        tableName = '"RAW".paro_municipio_' + str(sem) + '_' + str(anio)
+
+        return postgresqlFunc.getFromDb(tableName)
         return dev
     except Exception as e:
         logger.error("Error extrayendo datos de 'src/main/res/raw/edadMedia_sexo_municipio.csv'. " + str(e))

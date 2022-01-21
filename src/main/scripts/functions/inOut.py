@@ -2,6 +2,7 @@ import configparser
 import inspect
 import sys
 
+import src.main.scripts.functions.postgresql as postgresFunc
 import src.main.scripts.functions.logger as loggerFunc
 
 
@@ -18,6 +19,9 @@ import src.main.scripts.functions.logger as loggerFunc
 def setConfig(logger_level=30):
     # Preparamos el logger
     loggerFunc.setLoggerConfig()
+    logger = loggerFunc.getLogger("inOut")
+
+    logger.info("Preparando el configuración inicial.")
 
     # Preparamos el configParser
     try:
@@ -51,10 +55,18 @@ def setConfig(logger_level=30):
         # Sobreescribimos el fichero y guardamos la info nueva
         with open(conf['DEFAULT']['config_path'], 'w') as configfile:
             conf.write(configfile)
+
+        logger.info("Comprobamos conexión a la bd ....")
+        postgresFunc.getConn()
+        logger.info("Conexión con bd establecida.")
+
+        logger.info("Configuración inicial lista.")
     except Exception as e:
         # Este error lo mostramos por pantalla ya que el logger no está configurado.
         print("Error en setConfig(): " + str(e))
+        exit(1)
         pass
+
 
 # -----------------------------------------------------------------------------------------------
 # DESC:
@@ -77,5 +89,6 @@ def readConfig():
         logger = loggerFunc.getLogger("inOutFunctions")
         logger.error(str(e))
         return False
+
 
 # -----------------------------------------------------------------------------------------------
